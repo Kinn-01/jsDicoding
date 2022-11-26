@@ -153,7 +153,7 @@ const obj2 = { agg: 20, Gender: "Male" };
 const newObj = { ...obj1, ...obj2 };
 console.log(newObj);
 
-//Destruction Object
+//Destructuring Object
 const profile = {
   fN: "John",
   lN: "Doe",
@@ -169,3 +169,133 @@ let agee = 20;
 const { fN: localfN, lN: locallN, agee: localAgee } = profile;
 
 console.log(localfN, locallN, localAgee);
+
+//Destructuring Array
+const foodFav = ["Rawon", "Rendang", "Sate", "Gulai"];
+
+const [, , thirdFood, fourthFood] = foodFav;
+console.log(thirdFood, fourthFood);
+
+//Destructuring Assigment Array
+let myFavFood = "Rendang";
+let youFavFood = "Pizza";
+
+[myFavFood, youFavFood] = foodFav;
+console.log(myFavFood, youFavFood);
+
+//Menukarkan Nilai
+let a = 1;
+let b = 2;
+console.log("Sebelum Ditukar");
+console.log("Nilai a: " + a);
+console.log("Nilai b:" + b);
+
+[a, b] = [b, a]; // menetapkan nilai a dengan nilai b dengan nilai a
+
+console.log("Setelah Ditukar");
+console.log("Nilai a: " + a);
+console.log("Nilai b:" + b);
+
+// Map
+/*Map adalah tipe data yang menyimpan koleksi data dengan format key-value layaknya Object. 
+Yang membedakan adalah Map memperbolehkan key dengan tipe data apa pun, 
+dibandingkan Object yang hanya mengizinkan key bertipe String atau Symbol.*/
+
+const myMap = new Map([
+  ["213040037", "Gilmans"],
+  ["213040014", "Lutfi"],
+  ["213040008", "Fowaz"],
+  [true, false],
+]);
+
+console.log(myMap);
+
+console.log(myMap.get("Gilmans"));
+myMap.set("213040032", "Fauzi");
+console.log(myMap);
+
+// Set
+/* Struktur data yang akan kita bahas berikutnya adalah Set. 
+Set sederhananya merupakan kumpulan nilai (set of values). 
+Hal yang membedakan Set dengan struktur data yang lain adalah data pada Set tidak berurutan dan juga tidak diindeks. 
+Selain itu, data di dalam Set juga bersifat unik dan tidak ada duplikasi. */
+
+const setNumber = new Set([2, 1, 1, 3, 4, 3]);
+console.log(setNumber);
+setNumber.add(5);
+console.log(setNumber);
+setNumber.delete(2);
+console.log(setNumber);
+
+// Weakmap & Weakset
+
+/*Berikut ini adalah beberapa hal yang membedakan antara Map dan WeakMap:
+
+Key dari WeakMap harus berupa object atau array. Nilai primitif tidak bisa digunakan sebagai key karena tidak mendukung garbage collection.
+WeakMap memiliki method get(), set(), has(), dan delete(). 
+Namun, WeakMap tidak termasuk kategori iterable sehingga tidak memiliki method keys(), values(), atau forEach().
+WeakMap juga tidak memiliki property size. Ini karena ukuran WeakMap dapat berubah karena proses garbage collection.*/
+
+let visitCountMap = new Map(); // Menyimpan daftar user
+
+function countUser(user) {
+  let count = visitCountMap.get(user) || 0;
+  visitCountMap.set(user, count + 1);
+}
+
+let gilman = { name: "Gilman" };
+countUser(gilman); // Menambahkan user "Gilman"
+
+gilman = null; //Data object "Gilman" dihapus
+
+// delay dibutuhkan untuk menunggu garbage collector bekerja
+setTimeout(function () {
+  console.log(visitCountMap);
+}, 5000);
+
+//WeakMap
+
+//const { inspect } = require("util");
+
+//let visitsCountsMap = new WeakMap(); // Menyimpan daftar user
+
+// function countUsers(users) {
+//   let countt = visitsCountsMap.get(users) || 0;
+//   visitsCountsMap.set(users, countt + 1);
+// }
+
+// let jonas = { name: "Jonas" };
+// countUsers(jonas); // Menambahkan user "Jonas"
+
+// jonas = null; // Data object "Jonas" dihapus
+
+// delay dibutuhkan untuk menunggu garbage collector bekerja
+// setTimeout(function () {
+//   console.log(inspect(visitsCountsMap, { showHidden: true }));
+// }, 10000);
+
+/* output
+  WeakMap {  }
+*/
+
+const artistsAndSongs = {
+  Keyakizaka46: ["Silent Majority"],
+  Blackpink: ["How You Like That", "Ice Cream"],
+  JKT48: ["Rapsodi", "Heavy Rotation"],
+  Twice: ["What is Love?"],
+};
+
+artistsAndSongs["Babymetal"] = ["Gimme chocolate"];
+//delete artistsAndSongs["Keyakizaka46"];
+//artistsAndSongs["Blackpink"].push("Rose - Gone");
+
+console.log(artistsAndSongs);
+
+const capital = {
+  Jakarta: "Indonesia",
+  London: "England",
+  Tokyo: "Japan",
+};
+capital["New Delhi"] = "Indonesia";
+
+console.log(capital["Indonesia"]);
